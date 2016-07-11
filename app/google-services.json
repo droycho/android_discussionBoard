@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "947110263193",
+    "firebase_url": "https://discussionboard-ed83c.firebaseio.com",
+    "project_id": "discussionboard-ed83c",
+    "storage_bucket": "discussionboard-ed83c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947110263193:android:bc4ab8372d95ae8e",
+        "android_client_info": {
+          "package_name": "com.epicodus.discussionboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947110263193-vvsulh8q9r569uhdsfungsl35vc34e79.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8Xw5Rp9UaAasE-WzP3bEfFseepf3gHBU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

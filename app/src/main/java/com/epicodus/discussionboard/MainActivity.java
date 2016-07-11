@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        if(extras !=null) {
+            String value = extras.getString("questions");
+        }
         setContentView(R.layout.activity_main);
 
         mQuestionEditText = (EditText) findViewById(R.id.questionEditText);
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 String question = mQuestionEditText.getText().toString();
                 Log.d(TAG, question);
                 Intent intent = new Intent(MainActivity.this, SuccessActivity.class);
+                intent.putExtra("question", question);
                 startActivity(intent);
 
             }

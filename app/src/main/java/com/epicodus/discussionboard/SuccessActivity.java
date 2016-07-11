@@ -14,6 +14,8 @@ public class SuccessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
+        Intent intent = getIntent();
+        String question = intent.getStringExtra("question");
 
         mSuccessButton = (Button) findViewById(R.id.returnButton);
         mSuccessButton.setOnClickListener(new View.OnClickListener() {
@@ -21,6 +23,7 @@ public class SuccessActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(SuccessActivity.this, MainActivity.class);
+
                 startActivity(intent);
 
             }
