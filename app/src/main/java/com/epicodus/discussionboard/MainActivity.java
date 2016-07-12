@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,13 +18,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+        final ArrayList<String> questions = new ArrayList<>();
+
     public static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.newQuestionButton) Button mNewQuestionButton;
     @Bind(R.id.questionEditText) EditText mQuestionEditText;
+    @Bind(R.id.questionListView) ListView mQuestionListView;
 
     private DatabaseReference mInputtedQuestionReference;
 
@@ -35,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
                 .child(Constants.FIREBASE_CHILD_QUESTION);
 
         mInputtedQuestionReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot questionSnapshot : dataSnapshot.getChildren()) {
                     String question = questionSnapshot.getValue().toString();
                     Log.d("Questions updated", "question: " + question);
+                    questions.add(question);
                 }
             }
 
@@ -52,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, questions);
+        mQuestionListView.setAdapter(adapter);
 
         Intent intent = getIntent();
         String question = intent.getStringExtra("question");
