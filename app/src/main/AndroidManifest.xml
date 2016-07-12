@@ -17,7 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SuccessActivity"></activity>
+        <activity android:name=".SuccessActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.discussionboard.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
