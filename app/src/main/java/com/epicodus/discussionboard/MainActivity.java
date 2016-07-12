@@ -25,13 +25,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-        final ArrayList<String> questions = new ArrayList<>();
 
+    final ArrayList<String> questions = new ArrayList<>();
     public static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.newQuestionButton) Button mNewQuestionButton;
     @Bind(R.id.questionEditText) EditText mQuestionEditText;
     @Bind(R.id.questionListView) ListView mQuestionListView;
-
     private DatabaseReference mInputtedQuestionReference;
 
     @Override
@@ -69,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String question = intent.getStringExtra("question");
 
-//        getQuestions(question);
-
         mNewQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
+                intent.putExtra("question", questions);
                 startActivity(intent);
             }
         });
