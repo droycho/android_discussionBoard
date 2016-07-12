@@ -34,12 +34,12 @@
         android:layout_toLeftOf="@+id/newQuestionButton"
         android:layout_toStartOf="@+id/newQuestionButton" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/questionListView"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/questionEditText" />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/questionListView"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/questionEditText" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

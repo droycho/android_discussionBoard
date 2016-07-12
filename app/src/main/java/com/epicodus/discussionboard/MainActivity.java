@@ -45,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                //Log.d("onDataChange", "called");
                 for (DataSnapshot questionSnapshot : dataSnapshot.getChildren()) {
                     String question = questionSnapshot.getValue().toString();
                     Log.d("Questions updated", "question: " + question);
                     questions.add(question);
                 }
+                ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, questions);
+                mQuestionListView.setAdapter(adapter);
+//                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -61,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, questions);
-        mQuestionListView.setAdapter(adapter);
 
         Intent intent = getIntent();
         String question = intent.getStringExtra("question");
@@ -78,18 +79,26 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("question", question);
                 startActivity(intent);
             }
-            public void saveQuestionToFirebase(String question) {
-                mInputtedQuestionReference.push().setValue(question);
-            }
         });
 
-        mQuestionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final ListView questions = (ListView) findViewById(R.id.questionListView);
+
+        questions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String question = (String) (questions.getItemAtPosition(i));
                 Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
-                intent.putExtra("question", questions);
+                intent.putExtra("question", question);
                 startActivity(intent);
             }
         });
+    }
+
+    public void saveQuestionToFirebase(String question) {
+        Question questionObject = new Question(question);
+        DatabaseReference ref = mInputtedQuestionReference.push();
+        String pushId = ref.getKey();
+        questionObject.setPushId(pushId);
+        ref.setValue(questionObject);
     }
 }
