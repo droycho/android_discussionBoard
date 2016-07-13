@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Log.d("onDataChange", "called");
                 for (DataSnapshot questionSnapshot : dataSnapshot.getChildren()) {
-                    String question = questionSnapshot.getValue().toString();
+                    Question question = questionSnapshot.getValue(Question.class);
                     Log.d("Questions updated", "question: " + question);
-                    questions.add(question);
+                    questions.add(question.getQuestion());
                 }
                 ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, questions);
                 mQuestionListView.setAdapter(adapter);
